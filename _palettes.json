@@ -1,0 +1,28 @@
+{
+    "nextPaletteID": 1,
+    "palettes": {
+        "custom0": {
+            "id": "custom0",
+            "name": "Trip Games",
+            "colors": [
+                "#000000",
+                "#F4FEFF",
+                "#41396A",
+                "#292A25",
+                "#70433C",
+                "#FEE690",
+                "#ECE2B0",
+                "#434CAD",
+                "#003FAD",
+                "#78DC52",
+                "#8E2EC4",
+                "#A4839F",
+                "#5C406c",
+                "#E5CDC4",
+                "#91463d",
+                "#000000"
+            ],
+            "custom": true
+        }
+    }
+}
