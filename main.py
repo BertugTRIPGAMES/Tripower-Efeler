@@ -46,7 +46,7 @@ loc: tiles.Location = None
 vy = 0
 vx = 0
 happiness = 80
-para = 1000
+para = 1500
 info.set_life(happiness)
 
 # ─────────────────────────────────────────
@@ -234,7 +234,7 @@ game.show_long_text("Bu olumsuz durumu düzeltmek için belediyemiz...",
     DialogLayout.BOTTOM)
 game.show_long_text("SENİ görevlendirdi.", DialogLayout.BOTTOM)
 game.show_long_text("Halkımızı yüzüstü bırakma...", DialogLayout.BOTTOM)
-game.show_long_text("-TRİPOWER EFELER- bir Trip Games GameJam projesi",
+game.show_long_text("TriPower Efeler bir Trip Games GameJam projesi",
     DialogLayout.BOTTOM)
 sprites.destroy_all_sprites_of_kind(SpriteKind.food)
 

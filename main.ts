@@ -52,7 +52,7 @@ let loc : tiles.Location = null
 let vy = 0
 let vx = 0
 let happiness = 80
-let para = 1000
+let para = 1500
 info.setLife(happiness)
 //  ─────────────────────────────────────────
 //  MUTLULUK: eski ve yeni tile'a göre güncelle
@@ -245,7 +245,7 @@ game.showLongText("Halkı mutsuz ediyordu.", DialogLayout.Bottom)
 game.showLongText("Bu olumsuz durumu düzeltmek için belediyemiz...", DialogLayout.Bottom)
 game.showLongText("SENİ görevlendirdi.", DialogLayout.Bottom)
 game.showLongText("Halkımızı yüzüstü bırakma...", DialogLayout.Bottom)
-game.showLongText("-TRİPOWER EFELER- bir Trip Games GameJam projesi", DialogLayout.Bottom)
+game.showLongText("TriPower Efeler bir Trip Games GameJam projesi", DialogLayout.Bottom)
 sprites.destroyAllSpritesOfKind(SpriteKind.Food)
 //  ─────────────────────────────────────────
 //  OYUNCU OLUŞTURMA & HARİTA YÜKLEME
