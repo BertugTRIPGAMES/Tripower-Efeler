@@ -1,3 +1,6 @@
+# ─────────────────────────────────────────
+# TILE DEĞİŞİKLİKLERİNİ KAYDETME SİSTEMİ
+# ─────────────────────────────────────────
 saved_x = [0]
 saved_x.pop()
 saved_y = [0]
@@ -25,6 +28,9 @@ def apply_saved_changes():
         tiles.set_tile_at(restored_loc, saved_tiles[j])
         j += 1
 
+# ─────────────────────────────────────────
+# GLOBAL DEĞİŞKENLER
+# ─────────────────────────────────────────
 last_y = 0
 last_x = 0
 lastloc: tiles.Location = None
@@ -43,6 +49,9 @@ happiness = 80
 para = 1000
 info.set_life(happiness)
 
+# ─────────────────────────────────────────
+# MUTLULUK: eski ve yeni tile'a göre güncelle
+# ─────────────────────────────────────────
 def update_happiness(old_tile: Image, new_tile: Image):
     global happiness
     if old_tile == assets.tile("""
@@ -64,6 +73,9 @@ def update_happiness(old_tile: Image, new_tile: Image):
     happiness = Math.constrain(happiness, 0, 100)
     info.set_life(happiness)
 
+# ─────────────────────────────────────────
+# B TUŞU — Menü aç (haritada) / Tile seç (editörde)
+# ─────────────────────────────────────────
 def on_b_pressed():
     global x, y, loc, lastloc, last_x, last_y, last_tile, editoron, para
 
@@ -73,6 +85,7 @@ def on_b_pressed():
     current_tile = tiles.get_tile_image(loc)
 
     if not editoron:
+        # ── NORMAL HARİTA: builder menüsünü aç ──
         if current_tile == assets.tile("""
             Zone
             """) or current_tile == assets.tile("""
@@ -91,7 +104,8 @@ def on_b_pressed():
             editoron = True
         else:
             game.splash("Burayla işin yok!")
-    else:    
+    else:
+        # ── BUILDER MENÜSÜ: tile seç ve kaydet ──
         chosen_tile = None
         cost = 0
 
@@ -101,7 +115,7 @@ def on_b_pressed():
             chosen_tile = assets.tile("""
                 Windmill
                 """)
-            cost = 1500
+            cost = 2000
         elif current_tile == assets.tile("""
             Coal_Plant
             """):
@@ -127,6 +141,7 @@ def on_b_pressed():
             editoron = False
 
         if chosen_tile is not None:
+            # Para kontrolü
             if para < cost:
                 game.splash("YETERSİZ BAKİYE")
             else:
@@ -144,6 +159,9 @@ def on_b_pressed():
 
 controller.B.on_event(ControllerButtonEvent.PRESSED, on_b_pressed)
 
+# ─────────────────────────────────────────
+# A TUŞU — Haritada bilgi göster
+# ─────────────────────────────────────────
 def on_a_pressed():
     global x, y, loc
 
@@ -169,7 +187,7 @@ def on_a_pressed():
     elif current_tile2 == assets.tile("""
         Windmill
         """):
-        game.show_long_text("Bu bir rüzgar türbini. (1500 para)", DialogLayout.BOTTOM)
+        game.show_long_text("Bu bir rüzgar türbini. (2000 para)", DialogLayout.BOTTOM)
         game.show_long_text("Bu santral şehir için zararlı değil.", DialogLayout.BOTTOM)
     elif current_tile2 == assets.tile("""
         Exit
@@ -180,13 +198,15 @@ def on_a_pressed():
 
 controller.A.on_event(ControllerButtonEvent.PRESSED, on_a_pressed)
 
+# ─────────────────────────────────────────
+# GİRİŞ / INTRO
+# ─────────────────────────────────────────
 tripgameslogo = sprites.create(assets.image("""
     Trip Games
     """), SpriteKind.food)
 tripgameslogo.set_scale(2.5, ScaleAnchor.MIDDLE)
 scene.set_background_color(12)
-music.play(music.melody_playable(music.ba_ding), music.PlaybackMode.UNTIL_DONE)
-pause(3000)
+pause(3)
 game.set_dialog_frame(img("""
     b d b b b b b b b b b b b c b b
     d d d d d d d d d d d d d c d b
@@ -218,6 +238,9 @@ game.show_long_text("-TRİPOWER EFELER- bir Trip Games GameJam projesi",
     DialogLayout.BOTTOM)
 sprites.destroy_all_sprites_of_kind(SpriteKind.food)
 
+# ─────────────────────────────────────────
+# OYUNCU OLUŞTURMA & HARİTA YÜKLEME
+# ─────────────────────────────────────────
 player2 = sprites.create(img("""
         1 1 1 1 . . . . . . . . 1 1 1 1
         1 f f 1 . . . . . . . . 1 f f 1
@@ -247,11 +270,14 @@ game.show_long_text("Bu durumu düzeltmek senin elinde.", DialogLayout.BOTTOM)
 game.show_long_text("Verimsiz enerji kaynaklarını...", DialogLayout.BOTTOM)
 game.show_long_text("Temizleri ile değiştir.", DialogLayout.BOTTOM)
 game.show_long_text(
-    "Enerji kaynaklarını eklemek için sanayi bölgesinde git",
+    "Enerji kaynaklarını eklemek için sanayi bölgesindeki alanların üzerine gel",
     DialogLayout.CENTER)
-game.splash("B = Tile ile etkileşime geç")
+game.splash("B = Değiştirme menüsü")
 game.splash("A = Tile hakkında bilgi")
 
+# ─────────────────────────────────────────
+# HAREKET
+# ─────────────────────────────────────────
 def on_on_update():
     global vx, vy
     if controller.right.is_pressed():
@@ -280,6 +306,9 @@ def on_on_update():
     player2.vy = vy
 game.on_update(on_on_update)
 
+# ─────────────────────────────────────────
+# PARA / SKOR
+# ─────────────────────────────────────────
 def on_on_update2():
     global para
     pause(1)
